@@ -3,9 +3,7 @@
 An unofficial LAN multiplayer mod for REDCON on Android. 
 You need your own copy of the game for it.
 
-**0.1.1 — [Download the patcher](https://github.com/IndexProselyte/redcon-multiplayer/releases/latest)** (2.3 MiB)
-
-0.1.1 fixes one-way LAN discovery.
+**1.0 — [Download the patcher](https://github.com/IndexProselyte/redcon-multiplayer/releases/latest)** (2.3 MiB)
 
 ## Install
 
@@ -17,10 +15,6 @@ Requires Android 10 or newer, an ARM64 device, and the supported REDCON 2.2.0 ba
 4. Open **REDCON PvP**. Both players need the same mod version and the same local network. Guest Wi-Fi may block connections between devices.
 
 Patching runs on your phone. The mod installs separately from REDCON and leaves the official app and its saves alone. Campaign saves and purchases aren't transferred.
-
-**Earlier test builds:** `0.1.0-rc*` uses different signing keys and cannot be updated in place. Uninstalling an old test mod deletes its local saves. The patcher never removes it automatically.
-
-To check the download, compare `Get-FileHash ./redcon-pvp-patcher.apk -Algorithm SHA256` with [SHA256SUMS.txt](SHA256SUMS.txt).
 
 ## Source
 
