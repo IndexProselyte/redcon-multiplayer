@@ -1,0 +1,59 @@
+plugins { id 'com.android.application' }
+
+def releaseStore = providers.gradleProperty('releaseStoreFile')
+def releaseAlias = providers.gradleProperty('releaseKeyAlias')
+def releasePassword = providers.environmentVariable('REDCON_PATCHER_KEYSTORE_PASSWORD')
+def patchBundle = providers.gradleProperty('patchBundleDir')
+
+android {
+    namespace 'com.bytes14.redconpvp.patcher'
+    compileSdk 35
+    ndkVersion '28.2.13676358'
+
+    defaultConfig {
+        applicationId 'com.bytes14.redconpvp.patcher'
+        minSdk 29
+        targetSdk 35
+        versionCode providers.gradleProperty('patcherVersionCode').getOrElse('1').toInteger()
+        versionName providers.gradleProperty('patcherVersionName').getOrElse('0.1.0-rc1')
+        ndk { abiFilters 'arm64-v8a' }
+        externalNativeBuild { cmake { cppFlags '-std=c++17'; arguments '-DANDROID_STL=c++_static' } }
+    }
+    signingConfigs {
+        release {
+            if (releaseStore.isPresent() && releaseAlias.isPresent() && releasePassword.isPresent()) {
+                storeFile file(releaseStore.get())
+                storePassword releasePassword.get()
+                keyAlias releaseAlias.get()
+                keyPassword releasePassword.get()
+            }
+        }
+    }
+    buildTypes {
+        debug { applicationIdSuffix '.debug'; versionNameSuffix '-debug' }
+        release {
+            minifyEnabled false
+            if (releaseStore.isPresent() && releaseAlias.isPresent() && releasePassword.isPresent()) {
+                signingConfig signingConfigs.release
+            }
+        }
+    }
+    // The build is intentionally offline. Run source/static checks separately;
+    // AGP's release lint task otherwise tries to fetch an uncached tool bundle.
+    lint { checkReleaseBuilds false; abortOnError true }
+    sourceSets {
+        main {
+            if (patchBundle.isPresent()) assets.srcDir(file(patchBundle.get()))
+        }
+    }
+    externalNativeBuild { cmake { path file('src/main/cpp/CMakeLists.txt'); version '3.22.1' } }
+}
+
+tasks.matching { it.name == 'packageRelease' }.configureEach {
+    doFirst {
+        if (!releaseStore.isPresent() || !releaseAlias.isPresent() || !releasePassword.isPresent()) {
+            throw new GradleException('Release patcher signing credentials are required')
+        }
+        if (!patchBundle.isPresent()) throw new GradleException('patchBundleDir is required')
+    }
+}

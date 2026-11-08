@@ -1,0 +1,52 @@
+{
+  "build": {
+    "modBuild": "redcon-pvp-p6-build13",
+    "protocol": 3
+  },
+  "minimumPatcherVersion": 1,
+  "supported": {
+    "abis": [
+      "arm64-v8a"
+    ],
+    "minSdk": 29
+  },
+  "limits": {
+    "inputWindowBytes": 1048576,
+    "maxInputBytes": 67108864,
+    "maxOutputBytes": 67108864,
+    "maxPatchBytes": 12582912,
+    "minFreeSpaceBytes": 134217728,
+    "sourceWindowBytes": 16777216
+  },
+  "entry": {
+    "id": "redcon-2.2.0-arm64-v8a",
+    "input": {
+      "certificateSha256": "7f11ac55a9fa65667ea2674677f510ea8532ad19a5059e064d47ffd740e3d1aa",
+      "packageName": "net.hexage.redcon",
+      "versionCode": 12020003,
+      "versionName": "2.2.0"
+    },
+    "output": {
+      "certificateSha256": "af4034c44fb781b5f39417fe70ad778f616e5171378a98878fd1494f9d6351ea",
+      "packageName": "com.bytes14.redconpvp.game",
+      "versionCode": 1000008,
+      "versionName": "0.1.1"
+    },
+    "files": [
+      {
+        "sourcePath": "private-input/base.apk",
+        "targetPath": "private-target/base.apk",
+        "sourceName": "base.apk",
+        "targetName": "base.apk",
+        "patchName": "base.vcdiff"
+      },
+      {
+        "sourcePath": "private-input/split_config.arm64_v8a.apk",
+        "targetPath": "private-target/split_config.arm64_v8a.apk",
+        "sourceName": "split_config.arm64_v8a.apk",
+        "targetName": "split_config.arm64_v8a.apk",
+        "patchName": "split_config.arm64_v8a.vcdiff"
+      }
+    ]
+  }
+}
