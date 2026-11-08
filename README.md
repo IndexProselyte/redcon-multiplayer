@@ -3,7 +3,7 @@
 An unofficial LAN multiplayer mod for REDCON on Android. 
 You need your own copy of the game for it.
 
-**0.1.1 — [Download the patcher](redcon-pvp-patcher.apk?raw=true)** (2.3 MiB)
+**0.1.1 — [Download the patcher](https://github.com/IndexProselyte/redcon-multiplayer/releases/latest)** (2.3 MiB)
 
 0.1.1 fixes one-way LAN discovery.
 
